@@ -1,6 +1,13 @@
+variable "api_gateway_url" {
+    type = string
+}
+
+variable "dynamo_table" {
+    type = string
+}
+
 variable "aws_region" {
     type = string
-    default = "sa-east-1"
 }
 
 variable "stage_name" {
@@ -9,6 +16,4 @@ variable "stage_name" {
 
 variable "log_retention_days" {
     type = number
-    default = 1
 }
-

@@ -6,7 +6,7 @@ resource "aws_iam_role" "iam_for_lambda"{
 resource "aws_iam_policy" "lambda_logging" {
     name = "lambda_logging"
     path = "/"
-    description = "IAM policy para log da lambda"
+    description = "IAM policy for logging from a lambda"
 
     policy = <<EOF
     {
@@ -23,9 +23,7 @@ resource "aws_iam_policy" "lambda_logging" {
             },
             {
                 "Action": [
-                    "ec2:CreateNetworkInterface",
-                    "ec2:DescribeNetworkInterfaces",
-                    "ec2:DeleteNetworkInterface"
+                    "dynamodb:*"
                 ],
                 "Resource": "*",
                 "Effect": "Allow"
@@ -41,19 +39,19 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  function_name    = "titanic_lambda_function"
-  role             = aws_iam_role.iam_for_lambda.arn
-  runtime          = "provided.al2"
-  handler          = "bootstrap"
-  filename         = "lambda.zip"
-  source_code_hash = filebase64sha256("${path.module}/lambda.zip")
+    filename           = "lambda.zip"
+    function_name      = "avaliacoes_lambda"
+    role               = aws_iam_role.iam_for_lambda.arn
 
-  environment {
+    source_code_hash   = data.archive_file.lambda.output_base64sha256
+
+    runtime            = "python3.10"
+    handler            = "lambda.lambda_handler"
+
+    environment {
     variables = {
-      DB_USERNAME = local.db_secret.db_username
-      DB_PASSWORD = local.db_secret.db_password
-      DB_URL      = aws_db_instance.default.endpoint
-      DB_NAME     = aws_db_instance.default.db_name
+      API_GATEWAY_URL = var.api_gateway_url
+      DYNAMODB_TABLE  = var.dynamo_table
     }
   }
 }
