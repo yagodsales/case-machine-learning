@@ -10,10 +10,3 @@ variable "log_retention_days" {
     type = number
 }
 
-variable "db_secret_arn" {
-  type = string
-}
-
-variable "vpc_id" {
-    type = string
-}
