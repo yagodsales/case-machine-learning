@@ -12,6 +12,7 @@ variable "aws_region" {
 
 variable "stage_name" {
     type = string
+    default = "dev"
 }
 
 variable "log_retention_days" {

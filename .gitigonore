@@ -1,2 +1,6 @@
-*.lock
+# Terraform state
 *.tfstate
+*.tfstate.backup
+
+# lock files
+*.lock
