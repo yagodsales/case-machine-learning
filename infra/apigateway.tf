@@ -1,6 +1,11 @@
 resource "aws_api_gateway_rest_api" "titanic_gw_api"{
     name = "titanic_gw_api"
     description = "REST API for lambda"
+    body = templatefile("${path.module}/../openapi.yaml", {
+    region               = var.aws_region,
+    account_id           = var.account_id,
+    lambda_function_name = aws_lambda_function.lambda.function_name
+  })
 
     endpoint_configuration {
       types = ["REGIONAL"]

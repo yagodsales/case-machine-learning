@@ -46,7 +46,7 @@ resource "aws_lambda_function" "lambda" {
     source_code_hash   = data.archive_file.lambda.output_base64sha256
 
     runtime            = "python3.12"
-    handler            = "lambda.lambda_handler"
+    handler            = "titanic_lambda.lambda_handler"
 
     environment {
     variables = {

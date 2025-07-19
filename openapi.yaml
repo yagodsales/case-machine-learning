@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: API de Sobreviventes Titanic
+  version: 1.0.0
+  description: API para escorar modelo de Machine Learning e gerenciar previsões de sobrevivência.
+
+paths:
+  /sobreviventes:
+    post:
+      summary: Escorar modelo e salvar probabilidade de sobrevivência
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - caracteristicas
+              properties:
+                id:
+                  type: string
+                caracteristicas:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: Probabilidade calculada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  probabilidade_sobrevivencia:
+                    type: number
+                    format: float
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${region}:${account_id}:function:${lambda_function_name}/invocations
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: "1.0"
+
+    get:
+      summary: Lista todos passageiros avaliados
+      responses:
+        '200':
+          description: Lista de passageiros avaliados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    probabilidade_sobrevivencia:
+                      type: number
+                      format: float
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${region}:${account_id}:function:${lambda_function_name}/invocations
+        httpMethod: POST
+        type: aws_proxy
+        payloadFormatVersion: "1.0"
+
+  /sobreviventes/{id}:
+    get:
+      summary: Obter probabilidade do passageiro pelo ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Probabilidade do passageiro
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  probabilidade_sobrevivencia:
+                    type: number
+                    format: float
+        '404':
+          description: Passageiro não encontrado
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${region}:${account_id}:function:${lambda_function_name}/invocations
+        httpMethod: POST
+        type: aws_proxy
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        payloadFormatVersion: "1.0"
+
+    delete:
+      summary: Deletar passageiro pelo ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Passageiro deletado com sucesso
+        '404':
+          description: Passageiro não encontrado
+      x-amazon-apigateway-integration:
+        uri: arn:aws:apigateway:${region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${region}:${account_id}:function:${lambda_function_name}/invocations
+        httpMethod: POST
+        type: aws_proxy
+        requestParameters:
+          integration.request.path.id: method.request.path.id
+        payloadFormatVersion: "1.0"
+
+components: {}
