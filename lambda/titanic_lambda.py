@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 import boto3
 import pickle
 import os
