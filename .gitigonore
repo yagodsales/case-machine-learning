@@ -1,14 +1,15 @@
-# Terraform state
+# Terraform
 *.tfstate
 *.tfstate.backup
-*.terraform.lock.hcl
 .terraform/
-*.terraform/
+.terraform.lock.hcl
+
+# Diretório infra específico
 infra/.terraform/
-# lock files
-*.lock
-infra/.terraform.lock.hcl
-*.zip
 infra/terraform.tfstate
 infra/terraform.tfstate.backup
-infra/.terraform/
+infra/.terraform.lock.hcl
+
+# Outros arquivos
+*.lock
+*.zip
