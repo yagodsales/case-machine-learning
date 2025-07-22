@@ -7,6 +7,8 @@
 infra/.terraform/
 # lock files
 *.lock
-
+infra/.terraform.lock.hcl
 *.zip
-
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/.terraform/
