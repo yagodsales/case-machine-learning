@@ -17,7 +17,7 @@ COPY train_and_dump.py .
 RUN python train_and_dump.py   # gera model.pkl em /app
 
 #################
-# Imagem final  # (só inferência)
+# Imagem final  #
 #################
 FROM public.ecr.aws/lambda/python:3.10
 
