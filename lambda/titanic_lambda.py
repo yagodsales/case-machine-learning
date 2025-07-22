@@ -11,7 +11,7 @@ table_name = os.environ.get('DYNAMO_TABLE')
 table = dynamodb.Table(table_name)
 
 # Load model
-model = joblib.load('/opt/model.pkl')
+model = joblib.load('model.pkl')
 
 def lambda_handler(event, context):
     path = event.get('path')
