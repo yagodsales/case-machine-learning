@@ -4,6 +4,7 @@
 *.terraform.lock.hcl
 .terraform/
 *.terraform/
+infra/.terraform/
 # lock files
 *.lock
 
