@@ -38,25 +38,26 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
     policy_arn = aws_iam_policy.lambda_logging.arn
 }
 
-resource "aws_lambda_function" "lambda" {
-    filename           = "lambda.zip"
+resource "aws_lambda_function" "titanic" {
+    depends_on = [
+    null_resource.ecr_image
+  ]
+    timeout = 60
+  memory_size = 512
     function_name      = "titanic_lambda"
     role               = aws_iam_role.iam_for_lambda.arn
-
-    source_code_hash   = data.archive_file.lambda.output_base64sha256
-
-    runtime            = "python3.12"
-    handler            = "titanic_lambda.lambda_handler"
+    image_uri     = "${aws_ecr_repository.repo-lambda.repository_url}:latest"
+    package_type  = "Image"
 
     environment {
     variables = {
-      API_GATEWAY_URL = var.api_gateway_url
-      DYNAMODB_TABLE  = var.dynamo_table
+      DYNAMO_TABLE = var.dynamo_table
     }
   }
 }
 
+
 resource "aws_cloudwatch_log_group" "example"{
-    name = "/aws/lambda/${aws_lambda_function.lambda.function_name}"
+    name = "/aws/lambda/${aws_lambda_function.titanic.function_name}"
     retention_in_days = var.log_retention_days
 }
