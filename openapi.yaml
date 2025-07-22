@@ -8,6 +8,7 @@ paths:
   /sobreviventes:
     post:
       summary: Escorar modelo e salvar probabilidade de sobrevivência
+      security: []
       requestBody:
         required: true
         content:
@@ -44,6 +45,7 @@ paths:
 
     get:
       summary: Lista todos passageiros avaliados
+      security: []
       responses:
         '200':
           description: Lista de passageiros avaliados
@@ -68,6 +70,7 @@ paths:
   /sobreviventes/{id}:
     get:
       summary: Obter probabilidade do passageiro pelo ID
+      security: []
       parameters:
         - in: path
           name: id
@@ -99,6 +102,7 @@ paths:
 
     delete:
       summary: Deletar passageiro pelo ID
+      security: []
       parameters:
         - in: path
           name: id
