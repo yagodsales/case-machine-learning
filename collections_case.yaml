@@ -1,0 +1,153 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1730946565196
+  modified: 1730946565196
+  description: ""
+collection:
+  - url: "{{ _.url_base }}/sobreviventes"
+    name: Caracteristicas
+    meta:
+      id: req_c1b069663359479195f90386bd945098
+      created: 1745956402986
+      modified: 1753200719193
+      isPrivate: false
+      description: ""
+      sortKey: -1753198032597
+    method: POST
+    body:
+      mimeType: application/json
+      text: |
+        {
+          "caracteristicas": [22, 1, 0, 7.25, 0, 0, 2, 0]
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b7526bd4591b4b5a9cb74fa4182d58e5
+      - name: User-Agent
+        value: insomnia/11.0.2
+        id: pair_db0d215ae6014df4bbf768838e0b0dac
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.url_base }}/sobreviventes"
+    name: ALL
+    meta:
+      id: req_154906f97efb4c5a9534ff699c0d2892
+      created: 1753198032497
+      modified: 1753200746149
+      isPrivate: false
+      description: ""
+      sortKey: -1753198032497
+    method: GET
+    parameters:
+      - id: pair_6eba723c937e4ce5a35dbd5b92ed7fe1
+        name: id
+        value: d7efe84c-98bb-462d-b97f-04b5416ebbd3
+        description: ""
+        disabled: true
+      - id: pair_9fdc07c90b4f46e49e16a0f89c810211
+        name: ""
+        value: ""
+        description: ""
+        disabled: true
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.url_base }}/sobreviventes/{% response 'body',
+      'req_c1b069663359479195f90386bd945098', 'b64::JC5pZA==::46b', 'never', 60
+      %}"
+    name: Sobreviventes por ID
+    meta:
+      id: req_926550efd97a492f87dfce8d45b4c450
+      created: 1753198825985
+      modified: 1753214999115
+      isPrivate: false
+      description: ""
+      sortKey: -1753198032547
+    method: GET
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_c13260ee19ee4a44af198560d84c5158
+          name: 781993db-61dc-4071-b7d7-94b2a535d58a
+          value: ""
+          description: ""
+          disabled: true
+    parameters:
+      - id: pair_9d7537ae1174426f891675cea4a77360
+        name: ""
+        value: ""
+        description: ""
+        disabled: true
+      - id: pair_333bf01d8aab48bc979a769caf659c24
+        name: 781993db-61dc-4071-b7d7-94b2a535d58a
+        value: 781993db-61dc-4071-b7d7-94b2a535d58a
+        description: ""
+        disabled: true
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.url_base }}/sobreviventes/{% response 'body',
+      'req_c1b069663359479195f90386bd945098', 'b64::JC5pZA==::46b', 'never', 60
+      %}"
+    name: Delete por ID
+    meta:
+      id: req_d78ab660a76046d3a0159735974ab3d7
+      created: 1753200003855
+      modified: 1753200754663
+      isPrivate: false
+      description: ""
+      sortKey: -1753198032397
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1745956374071
+    modified: 1745956374071
+environments:
+  name: case-machine-learning
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1745956373985
+    modified: 1753214965929
+    isPrivate: false
+  data:
+    url_base: https://p4udsvhi53.execute-api.sa-east-1.amazonaws.com/dev
